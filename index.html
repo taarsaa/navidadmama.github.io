@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensaje de Agradecimiento</title>
+    <style>
+        body {
+            background-color: green;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .lock-screen {
+            background-color: darkgreen;
+            border: 3px solid white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+
+        .lock-screen input {
+            padding: 10px;
+            font-size: 18px;
+            border: 2px solid white;
+            border-radius: 5px;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .lock-screen button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: white;
+            color: darkgreen;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .lock-screen button:hover {
+            background-color: darkgreen;
+            color: white;
+            border: 2px solid white;
+        }
+
+        textarea {
+            width: 80%;
+            height: 100px;
+            background-color: black;
+            color: white;
+            border: 2px solid white;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+            resize: none;
+        }
+
+        .video-link {
+            margin-top: 20px;
+            display: inline-block;
+            padding: 15px 25px;
+            background-color: red;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .video-link:hover {
+            background-color: darkred;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="lockScreen" class="lock-screen">
+        <h1>¡Feliz Navidad!</h1>
+        <p>Introduce el código para desbloquear tu sorpresa navideña:</p>
+        <input type="password" id="unlockCode" placeholder="Código" />
+        <br>
+        <button onclick="unlock()">Desbloquear</button>
+    </div>
+
+    <div id="content" class="container hidden">
+        <h1>Feliz navidaaaaaaaaaaaaad Mama!</h1>
+        <textarea id="message" placeholder="Feliz navidad Mama, espero que lo pases bien, te deseo también un feliz 2025. 
+Este regalo próximamente lo tendrás en físico en un marco para que hagas lo que quieras con el. 
+Muchas gracias por todo. Te quierooo." oninput="saveMessage()"></textarea>
+        <a href="https://youtu.be/_nhcy1LN5vY" target="_blank" class="video-link">Video</a>
+    </div>
+
+    <script>
+        function unlock() {
+            const code = document.getElementById('unlockCode').value;
+            const correctCode = '1052007'; // Cambia este código según lo necesites
+
+            if (code === correctCode) {
+                document.getElementById('lockScreen').classList.add('hidden');
+                document.getElementById('content').classList.remove('hidden');
+            } else {
+                alert('Código incorrecto. Inténtalo de nuevo.');
+            }
+        }
+
+        function saveMessage() {
+            const messageBox = document.getElementById('message');
+            localStorage.setItem('message', messageBox.value);
+        }
+
+        function loadMessage() {
+            const savedMessage = localStorage.getItem('message');
+            if (savedMessage) {
+                document.getElementById('message').value = savedMessage;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadMessage);
+    </script>
+</body>
+</html>
